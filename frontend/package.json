@@ -1,0 +1,77 @@
+{
+  "name": "snap-insight-frontend",
+  "version": "0.1.0",
+  "description": "Snap Insight - AI-powered screenshot assistant",
+  "private": true,
+  "author": "SnapInsight",
+  "main": "./main/main.js",
+  "scripts": {
+    "dev": "concurrently -n \"NEXT,ELECTRON\" -c \"yellow,blue\" --kill-others \"next dev\" \"electron .\"",
+    "build": "next build && electron-builder"
+  },
+  "build": {
+    "appId": "com.snapinsight.app",
+    "productName": "Snap Insight",
+    "files": [
+      "./main/main.js",
+      "./main/preload.js",
+      "out/**/*"
+    ],
+    "directories": {
+      "buildResources": "../electron/icons",
+      "output": "../dist"
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  },
+  "dependencies": {
+    "@ant-design/cssinjs": "^1.23.0",
+    "@babel/core": "^7.26.10",
+    "@babel/eslint-parser": "^7.27.0",
+    "@headlessui/react": "^2.2.4",
+    "antd": "^5.25.3",
+    "antd-img-crop": "^4.25.0",
+    "auto-launch": "^5.0.6",
+    "build": "^0.1.4",
+    "date-fns": "^4.1.0",
+    "electron-serve": "^2.1.1",
+    "html2canvas": "^1.4.1",
+    "install": "^0.13.0",
+    "lucide-react": "^0.513.0",
+    "next": "15.2.4",
+    "next-auth": "^4.24.11",
+    "rc-util": "^5.44.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.2",
+    "recharts": "^2.15.3",
+    "styled-components": "^6.1.17"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4.1.8",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^35.1.5",
+    "electron-builder": "^24.13.3",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.4",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "wait-on": "^8.0.3"
+  }
+}

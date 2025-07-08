@@ -1,0 +1,66 @@
+# version "1.0"
+# this is the overall docker-compose file which will be used to run the entire project
+# this is to contanerize the entire project
+
+# version: '3.8'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: dockerfile.app
+    container_name: SA_server
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_HOST=db
+      - DB_PORT=5432
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"  # Expose FastAPI port for internal use (optional for development)
+    networks:
+      - app_network
+    volumes:
+    - fastapi_files:/app/project1/files  # 👈 mount volume to persist files
+
+  nginx:
+    build:
+      context: .
+      dockerfile: dockerfile.nginx
+    container_name: SA_nginx
+    ports:
+      - "80:80"  # Expose Nginx port for external use
+    depends_on:
+      - server
+    networks:
+      - app_network
+
+  db:
+    image: postgres:13
+    container_name: SA_db
+    env_file:
+      - .env
+    # Use the same environment variables as in the server service
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"  # Expose Postgres port for internal use (optional for development)
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge    # Use bridge network driver for the app network this is default network driver for docker-compose
+
+volumes:
+  postgres_data:
+  fastapi_files:
+    # as for why we need network, it is because we need to connect the fastapi and nginx containers together also 
+    # we need to connect the fastapi container to the database container.

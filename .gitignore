@@ -1,0 +1,197 @@
+# SnapInsight Project .gitignore
+# Tailored for FastAPI backend + Next.js/Electron frontend
+
+# =============================================================================
+# GENERAL
+# =============================================================================
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =============================================================================
+# BACKEND (Python/FastAPI/ML)
+# =============================================================================
+
+# Python runtime files
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/*.so
+
+# Virtual environments (your .venv)
+backend/.venv/
+backend/venv/
+backend/env/
+backend/ENV/
+
+# Environment variables (your .env files)
+backend/.env
+backend/.env.*
+backend/.env.local
+backend/.env.development
+backend/.env.production
+
+# Python version management
+backend/.python-version
+
+# Package management
+backend/build/
+backend/dist/
+backend/*.egg-info/
+backend/.eggs/
+
+# Testing and coverage
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+backend/.tox/
+backend/.cache/
+backend/coverage.xml
+
+# ML Models (CRITICAL - your classifier models)
+backend/models/module/classifier/
+backend/models/image/
+backend/*.pkl
+backend/*.joblib
+backend/*.h5
+backend/*.hdf5
+backend/*.safetensors
+backend/*.bin
+
+# Generated content and temp files
+backend/Screenshots/
+backend/result/
+backend/temp/
+backend/tmp/
+
+# Your specific temporary JSON files
+backend/htmlsavehtml_*.json
+backend/seen_ads_*.json
+backend/*_issues.md
+backend/product_listing_analysis.md
+
+# Database files
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# Alembic migrations (keep structure, ignore auto-generated)
+backend/alembic/versions/
+
+# Docker
+backend/docker-compose.override.yml
+
+# Logs
+backend/*.log
+backend/logs/
+
+# =============================================================================
+# FRONTEND (Next.js/Electron)
+# =============================================================================
+
+# Dependencies (your node_modules)
+frontend/node_modules/
+
+# Next.js build outputs (your .next and out directories)
+frontend/.next/
+frontend/out/
+
+# Environment files
+frontend/.env
+frontend/.env.*
+frontend/.env.local
+frontend/.env.development
+frontend/.env.test
+frontend/.env.production
+
+# Bun (your package manager)
+frontend/.bun/
+frontend/bun.lockb
+
+# Electron build outputs
+frontend/dist/
+frontend/dist-electron/
+frontend/release/
+frontend/build/
+frontend/packaged/
+frontend/app/
+
+# Build tools cache
+frontend/.cache/
+frontend/.parcel-cache/
+frontend/.eslintcache
+
+# TypeScript
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+# Logs
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+
+# =============================================================================
+# PROJECT SPECIFIC (SnapInsight)
+# =============================================================================
+
+# Screenshots and processed images
+Screenshots/
+screenshots/
+temp_images/
+processed_images/
+
+# Generated analysis files
+analysis_*.json
+results_*.json
+output_*.json
+
+# Test results
+test_results/
+reports/
+
+# Backup files
+*.backup
+*.bak
+
+# API keys and sensitive configs
+api_keys.txt
+credentials.json
+config_private.json
+
+# Large media files
+*.mov
+*.mp4
+*.avi
+*.mkv
+*.gif
+*.png
+*.jpg
+*.jpeg
+
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+
+# Temporary directories
+temp/
+tmp/
+cache/
+
+# Logs
+*.log
+logs/

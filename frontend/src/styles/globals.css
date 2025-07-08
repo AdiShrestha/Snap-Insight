@@ -1,0 +1,177 @@
+@import 'tailwindcss';
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+/* =================================================
+   THEME VARIABLES
+   ================================================= */
+
+/* DARK THEME (default root) */
+:root {
+  --color-bg-start: #2e003e;
+  --color-bg-end: #8d7497;
+  --color-nav-bar: #200329;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-primary: #8a2be2;
+  --color-primary-hover: #a95eff;
+  --color-accent: #ffc857;
+  --color-text: #ffffff;
+  --color-subtext: #d1b3ff;
+  --transition: 0.3s ease-in-out;
+  --radius: 1rem;
+}
+
+/* LIGHT THEME (applied by adding `.light` to <html> or <body>) */
+.light {
+  --color-bg-start: #f4f4f4;
+  --color-bg-end: #e0e0ff;
+  --color-nav-bar: #ffffff;
+  --color-glass: rgba(0, 0, 0, 0.03);
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-primary: #6a0dad;
+  --color-primary-hover: #7e3ff2;
+  --color-accent: #ff9800;
+  --color-text: #111111;
+  --color-subtext: #555555;
+}
+
+
+/* =================================================
+   BASE RESET + GLOBAL STYLES
+   ================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom right, var(--color-bg-start), var(--color-bg-end));
+  color: var(--color-text);
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-hover));
+  color: var(--color-text);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
+  transition: all var(--transition);
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+/* Container/Card Styling */
+.card {
+  background: var(--color-glass);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Typography */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+p {
+  color: var(--color-subtext);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Link */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: #ffd46a;
+}
+
+/* Utility */
+.text-center {
+  text-align: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.max-w-md {
+  max-width: 28rem;
+}
+@keyframes pulseDots {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.typing-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background: var(--color-subtext);
+  border-radius: 50%;
+  animation: pulseDots 1s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes slideIn {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes recordingPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+}
+
+.pulse-animation {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.recording-pulse {
+  animation: recordingPulse 1.5s infinite;
+}

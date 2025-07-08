@@ -1,0 +1,11 @@
+# Use the official Nginx image as the base
+FROM nginx:latest
+
+# Copy Nginx configuration
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80 for the proxy
+EXPOSE 80
+
+# Default command (already set in base image)
+CMD ["nginx", "-g", "daemon off;"]

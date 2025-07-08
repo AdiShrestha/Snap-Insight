@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Finder</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        #response { white-space: pre-wrap; background: #f5f5f5; padding: 15px; margin-top: 20px; }
+        button { padding: 10px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Recipe Finder</h1>
+    <form id="recipeForm">
+        <input type="text" id="queryText" placeholder="Your question..." required><br><br>
+        <input type="file" id="imageUpload" accept="image/*" required><br><br>
+        <button type="submit">Get Recipe</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('recipeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const responseDiv = document.getElementById('response');
+            responseDiv.textContent = "⌛ Processing...";
+            
+            try {
+                const formData = new FormData();
+                formData.append('text', document.getElementById('queryText').value);
+                formData.append('image', document.getElementById('imageUpload').files[0]);
+
+                // Try both localhost and 127.0.0.1
+                const apiUrls = [
+                    'http://localhost:8000/query',
+                    'http://127.0.0.1:8000/query'
+                ];
+
+                for (const url of apiUrls) {
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            body: formData,
+                            // 👇 Critical headers for FormData
+                            headers: {
+                                'Accept': 'application/json',
+                            }
+                        });
+                        
+                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                        const data = await response.json();
+                        responseDiv.textContent = data.result;
+                        return;
+                    } catch (err) {
+                        console.error(`Failed for ${url}:`, err);
+                    }
+                }
+                throw new Error("All API attempts failed");
+            } catch (error) {
+                responseDiv.textContent = `❌ Error: ${error.message}`;
+                console.error("Full error:", error);
+            }
+        });
+    </script>
+</body>
+</html>
